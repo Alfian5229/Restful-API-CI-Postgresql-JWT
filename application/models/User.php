@@ -20,5 +20,20 @@ class User extends CI_Model
                 'message'   => 'User successfully registered'
             ];
         }
-    }
+	}
+
+	//function for get all user information
+	public function get_all($id = null){
+
+		//if parameter is id, then showing user detail
+		if($id != null) {
+            $query  = $this->db->get_where('users', array('id' => $id));
+			return $query->result();
+		}
+		//showing all user detail
+		else {
+			$query = $this->db->get('users');
+			return $query->result();
+		}
+	}
 }
