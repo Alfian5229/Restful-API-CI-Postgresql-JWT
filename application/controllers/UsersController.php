@@ -9,7 +9,6 @@ class UsersController extends CI_Controller {
 	}
 	
 	public function register(){
-		var_dump("You are in the routing register");
-		exit;
+		$this->user->save();
     }
 }
