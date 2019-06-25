@@ -37,13 +37,17 @@ class User extends CI_Model
 		}
 	}
 
+	public function get_info($email){
+		$query = $this->db->get_where('users', array('email' => $email));
+		return $query->result();
+	}
+
 	//check if email is valid
 	public function is_valid() {
         $email      = $this->input->post('email');
         $password   = $this->input->post('password');
 
-		$query		= $this->db->get_where('users', array('email' => $email));
-		$hash		= $query->result()[0]->password;
+		$hash		= $this->get_info($email)[0]->password;
 
         if(password_verify($password, $hash)){
 			return true;
