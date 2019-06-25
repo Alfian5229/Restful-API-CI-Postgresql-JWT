@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+require_once APPPATH .'/libraries/JWT.php'; // Include the JWT.php
+use  \Firebase\JWT\JWT; //namespace in jwt
+
 class UsersController extends CI_Controller {
 
 	//calling model user
@@ -32,4 +35,19 @@ class UsersController extends CI_Controller {
 	public function detail_user($id) {
         return $this->response($this->user->get_all($id));
 	}
+
+	public function login() {
+        if (!$this->user->is_valid()) {
+            return $this->response([
+                'success'   => false,
+                'message'   => 'Password or Email is wrong'
+            ]);
+		}
+		else {
+			return $this->response([
+                'success'   => true,
+                'message'   => 'Password or Email is correct'
+            ]);
+		}
+    }
 }
