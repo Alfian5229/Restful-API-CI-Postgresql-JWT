@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+require_once APPPATH .'/libraries/JWT.php'; // Include the JWT.php
+use  \Firebase\JWT\JWT; //namespace in jwt
+
 class UsersController extends CI_Controller {
 
 	//calling model user
