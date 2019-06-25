@@ -27,7 +27,7 @@ class User extends CI_Model
 
 		//if parameter is id, then showing user detail
 		if($id != null) {
-            $query  = $this->db->get_where('users', array('id' => $id));
+            $query = $this->db->get_where('users', array('id' => $id));
 			return $query->result();
 		}
 		//showing all user detail
@@ -36,4 +36,20 @@ class User extends CI_Model
 			return $query->result();
 		}
 	}
+
+	//check if email is valid
+	public function is_valid() {
+        $email      = $this->input->post('email');
+        $password   = $this->input->post('password');
+
+		$query		= $this->db->get_where('users', array('email' => $email));
+		$hash		= $query->result()[0]->password;
+
+        if(password_verify($password, $hash)){
+			return true;
+		}
+		else{
+			return false;
+		}
+    }
 }
