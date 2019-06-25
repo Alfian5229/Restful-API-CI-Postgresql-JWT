@@ -35,4 +35,13 @@ class UsersController extends CI_Controller {
 	public function detail_user($id) {
         return $this->response($this->user->get_all($id));
 	}
+
+	public function login() {
+        if (!$this->user->is_valid()) {
+            return $this->response([
+                'success'   => false,
+                'message'   => 'Password or Email is wrong'
+            ]);
+        }
+    }
 }
