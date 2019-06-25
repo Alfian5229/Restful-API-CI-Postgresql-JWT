@@ -7,7 +7,7 @@ class UsersController extends CI_Controller {
         parent::__construct();
         $this->load->model('user');
 	}
-	
+
 	public function response($data){
         $this->output
             ->set_content_type('application/json')
@@ -18,6 +18,6 @@ class UsersController extends CI_Controller {
     }
 
 	public function register(){
-		$this->user->save();
+		return $this->response($this->user->save());
     }
 }
