@@ -42,6 +42,12 @@ class UsersController extends CI_Controller {
                 'success'   => false,
                 'message'   => 'Password or Email is wrong'
             ]);
-        }
+		}
+		else {
+			return $this->response([
+                'success'   => true,
+                'message'   => 'Password or Email is correct'
+            ]);
+		}
     }
 }
