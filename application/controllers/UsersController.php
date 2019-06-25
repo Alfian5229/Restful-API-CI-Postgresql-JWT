@@ -28,4 +28,8 @@ class UsersController extends CI_Controller {
 	public function all_users() {
         return $this->response($this->user->get_all());
 	}
+
+	public function detail_user($id) {
+        return $this->response($this->user->get_all($id));
+	}
 }
