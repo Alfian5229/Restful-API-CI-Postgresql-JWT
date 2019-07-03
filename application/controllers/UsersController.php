@@ -2,7 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once APPPATH .'/libraries/JWT.php'; // Include the JWT.php
-use  \Firebase\JWT\JWT; //namespace in jwt
+use \Firebase\JWT\JWT; //namespace in jwt
+use \Firebase\JWT\SignatureInvalidException;
 
 class UsersController extends CI_Controller {
 
