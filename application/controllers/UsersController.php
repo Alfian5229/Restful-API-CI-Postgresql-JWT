@@ -38,7 +38,6 @@ class UsersController extends CI_Controller {
 	}
 
 	public function login() {
-
 		//if login is invalid
         if (!$this->user->is_valid()) {
             return $this->response([
@@ -46,16 +45,23 @@ class UsersController extends CI_Controller {
                 'message'   => 'Password or Email is wrong'
             ]);
 		}
-
 		//if login is valid
 		else {
-			return $this->response([
-                'success'   => true,
-                'message'   => 'Password or Email is correct'
-			]);
-
+			// return $this->response([
+            //     'success'   => true,
+            //     'message'   => 'Password or Email is correct'
+			// ]);
 			$email = $this->input->post('email');
-			$user = $this->user->get_all('email',$email);
+			$user = $this->user->get_info($email);
+
+			$date = new DateTime();
+			// Collect data
+					$payload['id']      = $user[0]->id;
+					$payload['email']   = $user[0]->email;
+					$payload['iat']     = $date->getTimestamp();
+					$payload['exp']     = $date->getTimestamp() + 60*60*2;
+					
+			var_dump($payload);
 		}
     }
 }
