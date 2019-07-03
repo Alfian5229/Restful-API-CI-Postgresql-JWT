@@ -47,21 +47,23 @@ class UsersController extends CI_Controller {
 		}
 		//if login is valid
 		else {
-			// return $this->response([
-            //     'success'   => true,
-            //     'message'   => 'Password or Email is correct'
-			// ]);
+
 			$email = $this->input->post('email');
 			$user = $this->user->get_info($email);
 
 			$date = new DateTime();
-			// Collect data
 			$payload['id']      = $user[0]->id;
 			$payload['email']   = $user[0]->email;
 			$payload['iat']     = $date->getTimestamp();
 			$payload['exp']     = $date->getTimestamp() + 60*60*2;
 					
-			var_dump($payload);
+			// Encode data
+			$output= JWT::encode($payload, $this->secret);
+			return $this->response([
+                'success'   => true,
+				'message'   => 'Password or Email is correct',
+				'token'		=> $output
+			]);
 			
 		}
     }
