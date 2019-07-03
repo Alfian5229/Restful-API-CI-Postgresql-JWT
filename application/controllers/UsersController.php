@@ -75,6 +75,7 @@ class UsersController extends CI_Controller {
 		try {
 			//decode token with HS256 method
 			$decode = JWT::decode($jwt, $this->secret, array('HS256'));
+			var_dump($decode);
 		} catch(\SignatureInvalidException $e) {
 			var_dump($e); //var_dump error
 		}
