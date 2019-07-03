@@ -37,17 +37,24 @@ class UsersController extends CI_Controller {
 	}
 
 	public function login() {
+
+		//if login is invalid
         if (!$this->user->is_valid()) {
             return $this->response([
                 'success'   => false,
                 'message'   => 'Password or Email is wrong'
             ]);
 		}
+
+		//if login is valid
 		else {
 			return $this->response([
                 'success'   => true,
                 'message'   => 'Password or Email is correct'
-            ]);
+			]);
+
+			$email = $this->input->post('email');
+			$user = $this->user->get_all('email',$email);
 		}
     }
 }
