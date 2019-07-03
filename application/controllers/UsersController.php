@@ -32,6 +32,7 @@ class UsersController extends CI_Controller {
         return $this->response($this->user->get_all());
 	}
 
+	//api for get 1 user by id
 	public function detail_user($id) {
         return $this->response($this->user->get_all($id));
 	}

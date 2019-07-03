@@ -37,6 +37,7 @@ class User extends CI_Model
 		}
 	}
 
+	//function to get user info with email
 	public function get_info($email){
 		$query = $this->db->get_where('users', array('email' => $email));
 		return $query->result();
