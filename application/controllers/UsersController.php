@@ -6,6 +6,8 @@ use  \Firebase\JWT\JWT; //namespace in jwt
 
 class UsersController extends CI_Controller {
 
+	private $secret = "codeigniterpostgresql";
+
 	//calling model user
 	public function __construct(){
         parent::__construct();
