@@ -68,5 +68,15 @@ class UsersController extends CI_Controller {
 			]);
 			
 		}
-    }
+	}
+	
+	public function check_token() {
+		$jwt = $this->input->get_request_header('Authorization');
+		try {
+			//decode token with HS256 method
+			$decode = JWT::decode($jwt, $this->secret, array('HS256'));
+		} catch(\SignatureInvalidException $e) {
+			var_dump($e); //var_dump error
+		}
+	}
 }
