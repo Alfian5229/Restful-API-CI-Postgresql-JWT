@@ -56,12 +56,13 @@ class UsersController extends CI_Controller {
 
 			$date = new DateTime();
 			// Collect data
-					$payload['id']      = $user[0]->id;
-					$payload['email']   = $user[0]->email;
-					$payload['iat']     = $date->getTimestamp();
-					$payload['exp']     = $date->getTimestamp() + 60*60*2;
+			$payload['id']      = $user[0]->id;
+			$payload['email']   = $user[0]->email;
+			$payload['iat']     = $date->getTimestamp();
+			$payload['exp']     = $date->getTimestamp() + 60*60*2;
 					
 			var_dump($payload);
+			
 		}
     }
 }
