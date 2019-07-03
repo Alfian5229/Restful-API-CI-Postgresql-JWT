@@ -58,6 +58,8 @@ $route['api/user/(:num)']['PUT']    = "UsersController/update/$1";
 $route['api/user/(:num)']['DELETE'] = "UsersController/delete/$1";
 $route['api/login']['POST']         = "UsersController/login";
 
+//Endpoint to check token
+$route['api/check-token']['GET']	= "UsersController/check_token";
 
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
