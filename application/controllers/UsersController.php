@@ -12,7 +12,12 @@ class UsersController extends CI_Controller {
 	//calling model user
 	public function __construct(){
         parent::__construct();
-        $this->load->model('user');
+		$this->load->model('user');
+		
+		// Allowing CORS
+		header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
 	}
 
 	//dynamic response
