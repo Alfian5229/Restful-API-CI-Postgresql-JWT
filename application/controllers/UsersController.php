@@ -76,12 +76,31 @@ class UsersController extends CI_Controller {
 		try {
 			//decode token with HS256 method
 			$decode = JWT::decode($jwt, $this->secret, array('HS256'));
-			var_dump($decode);
+			return $decode->id;
 		} catch(\Exception $e) {
 			return $this->response([
                 'success'   => false,
-                'message'   => 'invalid token'
+				'message'   => 'invalid token',
+				'id'		=> 0
             ]);
+		}
+	}
+
+	public function update($id) {
+		parse_str(file_get_contents("php://input"),$data);
+        if ($this->protected_method($id)) {
+			return $this->response($this->user->update($id, $data));
+		}
+    }
+
+	public function protected_method($id) {
+		if ($id == $this->check_token()) { // Check the $id match or not with the decode->id
+			return true;
+		} else {
+			return $this->response([
+				'success'   => false,
+				'message'   => "User is different"
+			]);
 		}
 	}
 }
