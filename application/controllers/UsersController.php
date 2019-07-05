@@ -93,6 +93,12 @@ class UsersController extends CI_Controller {
 		}
     }
 
+	public function delete($id) {
+        if ($this->protected_method($id)) {
+            return $this->response($this->user->delete($id));
+        }
+    }
+
 	public function protected_method($id) {
 		if ($id == $this->check_token()) { // Check the $id match or not with the decode->id
 			return true;
