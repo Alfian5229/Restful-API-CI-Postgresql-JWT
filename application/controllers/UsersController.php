@@ -51,7 +51,7 @@ class UsersController extends CI_Controller {
             return $this->response([
                 'success'   => false,
                 'message'   => 'Password or Email is wrong'
-            ]);
+			], 401);
 		}
 		//if login is valid
 		else {
