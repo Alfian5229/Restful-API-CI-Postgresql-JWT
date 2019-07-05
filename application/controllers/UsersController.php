@@ -21,10 +21,10 @@ class UsersController extends CI_Controller {
 	}
 
 	//dynamic response
-	public function response($data){
+	public function response($data, $status = 200){
         $this->output
             ->set_content_type('application/json')
-            ->set_status_header(200)
+            ->set_status_header($status)
             ->set_output(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
             ->_display();
         exit;
