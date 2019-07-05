@@ -59,11 +59,14 @@ class User extends CI_Model
 	}
 
 	public function update($id, $data) {
-        $data = ["email" => $data->email];
-
+        $data_email = $data['email'];
 		$this->db->where('id', $id);
 		
-		if($this->db->update('users', $data)){
+		$updateData = array(
+			'email'=> $data_email
+		);
+
+		if($this->db->update('users', $updateData)){
 			return [
 				'status'	=> true,
 				'message'	=> 'Data successfully updated'
