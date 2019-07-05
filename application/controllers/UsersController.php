@@ -88,4 +88,20 @@ class UsersController extends CI_Controller {
             ]);
 		}
 	}
+
+	public function protected_method($id) {
+        if ($id_from_token = $this->check_token()) {
+            if ($id_from_token == $id) { // Check the $id match or not with the decode->id
+                return $this->response([
+                    'success'   => true,
+                    'message'   => "User is match."
+                ]);
+            } else {
+                return $this->response([
+                    'success'   => false,
+                    'message'   => "User is different."
+                ]);
+            }
+        }
+	}
 }
