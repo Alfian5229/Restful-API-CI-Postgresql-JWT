@@ -89,6 +89,14 @@ class UsersController extends CI_Controller {
 		}
 	}
 
+	public function update($id) {
+        $data = json_decode(file_get_contents('php://input'));
+        var_dump($data);exit;
+        if ($this->protected_method($id)) {
+            return $this->response($this->user->update($id, $data));
+        }
+    }
+
 	public function protected_method($id) {
         if ($id_from_token = $this->check_token()) {
             if ($id_from_token == $id) { // Check the $id match or not with the decode->id
