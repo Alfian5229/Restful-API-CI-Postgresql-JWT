@@ -12,14 +12,19 @@ class UsersController extends CI_Controller {
 	//calling model user
 	public function __construct(){
         parent::__construct();
-        $this->load->model('user');
+		$this->load->model('user');
+		
+		// Allowing CORS
+		header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
 	}
 
 	//dynamic response
-	public function response($data){
+	public function response($data, $status = 200){
         $this->output
             ->set_content_type('application/json')
-            ->set_status_header(200)
+            ->set_status_header($status)
             ->set_output(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
             ->_display();
         exit;
@@ -46,7 +51,7 @@ class UsersController extends CI_Controller {
             return $this->response([
                 'success'   => false,
                 'message'   => 'Password or Email is wrong'
-            ]);
+			], 401);
 		}
 		//if login is valid
 		else {
@@ -91,6 +96,12 @@ class UsersController extends CI_Controller {
         if ($this->protected_method($id)) {
 			return $this->response($this->user->update($id, $data));
 		}
+    }
+
+	public function delete($id) {
+        if ($this->protected_method($id)) {
+            return $this->response($this->user->delete($id));
+        }
     }
 
 	public function protected_method($id) {
